@@ -14,7 +14,7 @@ class LiveController extends Controller
 
         return view('pages.live', [
             'video' => VideoLink::parse(Setting::get('live_stream_url')),
-            'schedule' => $live['schedule'] ?? 'Sundays 9:00 AM and 10:30 AM',
+            'schedule' => $live['schedule'] ?? 'Sundays 9:00 AM',
             'fallback' => $live['fallback'] ?? null,
             'replays' => Post::latestOfType('excerpt', 3)->get()->filter(fn ($p) => $p->video()),
         ]);
