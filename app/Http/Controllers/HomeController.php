@@ -112,7 +112,7 @@ class HomeController extends Controller
     private function defaultCapsules(): array
     {
         return [
-            ['label' => 'Live', 'source' => 'Livestream', 'on' => true, 'schedule' => 'Sundays 9:00 AM and 10:30 AM', 'fallback' => "Last Sunday's service replay"],
+            ['label' => 'Live', 'source' => 'Livestream', 'on' => true, 'schedule' => 'Sundays 9:00 AM', 'fallback' => "Last Sunday's service replay"],
             ['label' => 'Excerpts', 'source' => 'Latest excerpt', 'on' => true, 'schedule' => 'Always on', 'fallback' => 'Most recent excerpt'],
             ['label' => 'Featured', 'source' => 'Higher Life episode', 'on' => true, 'schedule' => 'Always on', 'fallback' => 'Latest Higher Life episode'],
         ];
