@@ -13,7 +13,7 @@ class HomeController extends Controller
     public function index()
     {
         $sections = collect(Setting::get('home_sections', $this->defaultSections()))
-            ->filter(fn ($s) => $s['on'])->values();
+            ->filter(fn ($s) => $s['on'] && $s['label'] !== 'Sunday Best Dressers')->values();
 
         $excerpts = Post::latestOfType('excerpt', 6)->get();
         $featured = $this->featuredEpisode();
@@ -25,7 +25,6 @@ class HomeController extends Controller
             'higherLifeFeatured' => $featured,
             'higherLifeList' => Post::latestOfType('higher_life', 4)
                 ->when($featured, fn ($q) => $q->where('id', '!=', $featured->id))->limit(3)->get(),
-            'bestDressers' => Post::latestOfType('best_dresser', 4)->get()->sortByDesc(fn ($p) => (bool) $p->meta('featured'))->values(),
             'events' => Post::type('event')->published()
                 ->whereRaw("JSON_EXTRACT(meta, '$.starts_at') >= ?", [now()->toDateString()])
                 ->orderByRaw("JSON_EXTRACT(meta, '$.starts_at') asc")->limit(3)->get(),
@@ -105,7 +104,7 @@ class HomeController extends Controller
 
     private function defaultSections(): array
     {
-        return collect(['Media console', 'Worship with Us', 'Welcome', 'Latest excerpts', 'Higher Life', 'Sunday Best Dressers', 'Upcoming events', 'Fellowships and Departments', 'Testimonies', 'Prayer request band'])
+        return collect(['Media console', 'Worship with Us', 'Welcome', 'Latest excerpts', 'Higher Life', 'Upcoming events', 'Fellowships and Departments', 'Testimonies', 'Prayer request band'])
             ->map(fn ($l) => ['label' => $l, 'on' => true])->all();
     }
 

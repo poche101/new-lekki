@@ -11,11 +11,17 @@ class HomepageController extends Controller
 {
     public function edit()
     {
+        $sections = collect(Setting::get('home_sections', collect([
+            'Media console', 'Worship with Us', 'Welcome', 'Latest excerpts', 'Higher Life',
+            'Upcoming events', 'Fellowships and Departments', 'Testimonies', 'Prayer request band',
+        ])->map(fn ($l) => ['label' => $l, 'on' => true])->all()))
+            // Drop the retired section if it's still stored in the saved order.
+            ->reject(fn ($s) => ($s['label'] ?? null) === 'Sunday Best Dressers')
+            ->values()
+            ->all();
+
         return view('admin.homepage', [
-            'sections' => Setting::get('home_sections', collect([
-                'Media console', 'Worship with Us', 'Welcome', 'Latest excerpts', 'Higher Life', 'Sunday Best Dressers',
-                'Upcoming events', 'Fellowships and Departments', 'Testimonies', 'Prayer request band',
-            ])->map(fn ($l) => ['label' => $l, 'on' => true])->all()),
+            'sections' => $sections,
             'capsules' => Setting::get('capsules', []),
             'higherLifeOptions' => Post::type('higher_life')->published()->latest('published_at')->get(),
             'featured' => Setting::get('featured_higher_life_id'),

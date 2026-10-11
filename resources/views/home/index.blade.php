@@ -127,8 +127,8 @@
     <section>
       <div class="wrap">
         <span class="chip" style="margin-bottom:10px">Who we are</span>
-        <h2 style="font-size:2rem;max-width:16ch">A Global Identity</h2>
-        <p class="lede">Christ Embassy is not just a local assembly; it&rsquo;s a vision. The Lord has called us to fulfill a very definite purpose, which is to take His divine presence to the peoples and nations.</p>
+        <h2 style="font-size:2rem;max-width:16ch">Our Vision</h2>
+        <p class="lede">Our Vision is to take the divine presence of God to the nations and peoples of the world, and to demonstrate the character of the Spirit</p>
       </div>
     </section>
 
@@ -308,26 +308,6 @@
       </div>
     </section>
 
-  @elseif ($label === 'Sunday Best Dressers')
-    <section>
-      <div class="wrap">
-        <h2 style="margin-bottom:20px">Sunday Best Dressers</h2>
-        <div class="grid dresser-grid">
-          @forelse ($bestDressers as $bd)
-            <a class="card dresser-card" href="{{ $bd->publicUrl() }}">
-              <div class="dresser-photo" @unless ($bd->thumbnailUrl()) style="background:linear-gradient(150deg,#bcd6fe,#0D6EFD)" @endunless>
-                @if ($bd->thumbnailUrl())<img src="{{ $bd->thumbnailUrl() }}" alt="{{ $bd->meta('name') ?: $bd->title }}" loading="lazy">@endif
-                @if ($bd->meta('featured'))<span class="chip dresser-chip">Featured</span>@endif
-              </div>
-              <h3 style="font-size:1rem;margin-top:10px">{{ $bd->meta('name') ?: $bd->title }}</h3>
-              <p style="color:var(--grey);font-size:.85rem;margin-top:6px">{{ $bd->excerpt_text ?: $bd->meta('month') }}</p>
-            </a>
-          @empty
-            <p style="color:var(--grey)">No Best Dresser posts yet.</p>
-          @endforelse
-        </div>
-      </div>
-    </section>
 
   @elseif ($label === 'Upcoming events')
     <section>
