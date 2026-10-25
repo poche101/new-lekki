@@ -2,7 +2,6 @@
 @section('title', 'Christ Embassy Lekki')
 @section('content')
 
-@include('partials.ad-banner')
 
 @foreach ($sections as $section)
   @php $label = $section['label']; @endphp
@@ -69,6 +68,10 @@
         </div>
       </div>
     </section>
+
+    @include('partials.ad-banner')
+    <br>
+    <br>
     @push('styles')
     <style>
       .console-stage--compact{aspect-ratio:16/9;max-height:none}

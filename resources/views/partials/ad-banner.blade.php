@@ -15,26 +15,26 @@
     .adbar-close:hover { background: #e6e9ee; color: #111; }
 
     .adbar-track { display: flex; transition: transform .6s cubic-bezier(.65,0,.35,1); will-change: transform; }
-    .adbar-slide { position: relative; flex: 0 0 100%; min-height: 160px; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 24px 28px; text-decoration: none; color: #fff; overflow: hidden; background: #0f1629; }
+    .adbar-slide { position: relative; flex: 0 0 100%; min-height: 280px; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 40px 36px 44px; text-decoration: none; color: #fff; overflow: hidden; background: #0f1629; }
     .adbar-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
     .adbar-slide::before { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(8,12,28,.78) 0%, rgba(8,12,28,.45) 55%, rgba(8,12,28,.15) 100%); }
     .adbar-copy, .adbar-cta { position: relative; z-index: 2; }
-    .adbar-headline { margin: 0; max-width: 30ch; font-size: clamp(1.2rem, 2.4vw, 1.9rem); line-height: 1.15; font-weight: 800; letter-spacing: -.01em; color: #fff; }
-    .adbar-sub { margin: 8px 0 0; max-width: 46ch; font-size: .92rem; color: rgba(255,255,255,.8); }
-    .adbar-cta { flex-shrink: 0; display: inline-block; padding: 13px 24px; border-radius: 4px; background: #2f9e5b; color: #fff; font-weight: 800; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; transition: background .2s ease, transform .2s ease; }
+    .adbar-headline { margin: 0; max-width: 30ch; font-size: clamp(1.4rem, 3vw, 2.4rem); line-height: 1.15; font-weight: 800; letter-spacing: -.01em; color: #fff; }
+    .adbar-sub { margin: 12px 0 0; max-width: 46ch; font-size: 1rem; color: rgba(255,255,255,.8); }
+    .adbar-cta { flex-shrink: 0; display: inline-block; padding: 15px 30px; border-radius: 4px; background: #2f9e5b; color: #fff; font-weight: 800; font-size: .85rem; letter-spacing: .1em; text-transform: uppercase; transition: background .2s ease, transform .2s ease; }
     .adbar-slide:hover .adbar-cta { background: #26844b; transform: translateY(-1px); }
 
     .adbar-slide--default { background: radial-gradient(700px 300px at 90% -20%, rgba(122,167,255,.35), transparent 60%), radial-gradient(500px 260px at 0% 120%, rgba(217,184,102,.22), transparent 60%), #0f1629; }
     .adbar-slide--default::before { display: none; }
-    .adbar-kicker { display: inline-block; margin-bottom: 8px; font-size: 11px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: #d9b866; }
+    .adbar-kicker { display: inline-block; margin-bottom: 10px; font-size: 11px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: #d9b866; }
 
-    .adbar-dots { position: absolute; left: 0; right: 0; bottom: 8px; z-index: 5; display: flex; justify-content: center; gap: 6px; }
+    .adbar-dots { position: absolute; left: 0; right: 0; bottom: 14px; z-index: 5; display: flex; justify-content: center; gap: 6px; }
     .adbar-dots button { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%; background: rgba(255,255,255,.5); cursor: pointer; }
     .adbar-dots button.is-active { background: #fff; width: 20px; border-radius: 4px; }
 
     @media (max-width: 700px) {
-      .adbar-slide { flex-direction: column; align-items: flex-start; justify-content: center; padding: 38px 18px 30px; min-height: 190px; }
-      .adbar-cta { width: 100%; text-align: center; padding: 12px 16px; }
+      .adbar-slide { flex-direction: column; align-items: flex-start; justify-content: center; padding: 46px 18px 44px; min-height: 300px; }
+      .adbar-cta { width: 100%; text-align: center; padding: 13px 16px; }
     }
     @media (prefers-reduced-motion: reduce) { .adbar-track { transition: none; } }
   </style>
@@ -68,7 +68,7 @@
           <div class="adbar-copy">
             <span class="adbar-kicker">Advertise with us</span>
             <p class="adbar-headline">Your business could be seen here</p>
-            <p class="adbar-sub">Place your ad with images or video and reach our congregation and visitors every day.</p>
+            <p class="adbar-sub">Promote your products with images or video, and stream your events live right here!</p>
           </div>
           <span class="adbar-cta">Place your ad</span>
         </a>
