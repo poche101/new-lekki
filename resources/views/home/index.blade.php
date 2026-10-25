@@ -2,6 +2,8 @@
 @section('title', 'Christ Embassy Lekki')
 @section('content')
 
+@include('partials.ad-banner')
+
 @foreach ($sections as $section)
   @php $label = $section['label']; @endphp
 
@@ -112,12 +114,7 @@
             <p class="w-addr">LoveWorld Arena, Aare Bashiru Street, Chisco B/S<br>Lekki-Epe Expressway, Lagos</p>
           </div>
           <div class="worship-action">
-            <form class="field" id="routeForm">
-              <label for="fromInput">Get directions</label>
-              <input id="fromInput" type="text" placeholder="Enter your location (e.g. Ikeja)">
-              <button class="btn btn-blue btn-block" style="margin-top:12px" type="submit">Get Route</button>
-            </form>
-            <p style="margin-top:16px"><a href="tel:+2349076415312" style="text-decoration:underline">+234 907 641 5312</a></p>
+            <p><a href="tel:+2349076415312" style="text-decoration:underline">+234 907 641 5312</a></p>
           </div>
         </div>
       </div>
@@ -365,11 +362,6 @@
       </div>
     </section>
   @endif
-@endforeach
-
-@foreach ($ads as $ad)
-  {{-- Ad popups: rendered but hidden; site.js shows/alternates them per admin > Ads config --}}
-  <template data-ad data-title="{{ $ad->title }}" data-banner="{{ $ad->banner_label }}" data-link="{{ $ad->link }}"></template>
 @endforeach
 
 @push('scripts')
