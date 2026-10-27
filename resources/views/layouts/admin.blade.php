@@ -73,8 +73,15 @@
     @can('members')<a href="{{ route('admin.members.index') }}" class="{{ request()->routeIs('admin.members.*') ? 'is-current' : '' }}">Members</a>@endcan
     @can('moderate')<a href="{{ route('admin.comments.index') }}" class="{{ request()->routeIs('admin.comments.*') ? 'is-current' : '' }}">Comments</a>@endcan
     @can('moderate')
-      @php($unreadMessages = \App\Models\ContactMessage::whereNull('read_at')->count())
-      <a href="{{ route('admin.messages.index') }}" class="{{ request()->routeIs('admin.messages.*') ? 'is-current' : '' }}">Messages@if ($unreadMessages > 0)<span class="a-badge">{{ $unreadMessages > 99 ? '99+' : $unreadMessages }}</span>@endif</a>
+      @php
+        $unreadMessages = \App\Models\ContactMessage::whereNull('read_at')->count();
+      @endphp
+      <a href="{{ route('admin.messages.index') }}" class="{{ request()->routeIs('admin.messages.*') ? 'is-current' : '' }}">
+        Messages
+        @if ($unreadMessages > 0)
+          <span class="a-badge">{{ $unreadMessages > 99 ? '99+' : $unreadMessages }}</span>
+        @endif
+      </a>
     @endcan
     @can('notify')<a href="{{ route('admin.notifications.index') }}" class="{{ request()->routeIs('admin.notifications.*') ? 'is-current' : '' }}">Notifications</a>@endcan
     <div class="grp">Insights &amp; access</div>
