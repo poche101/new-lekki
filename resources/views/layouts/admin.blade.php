@@ -52,6 +52,16 @@
 </head>
 <body style="background:var(--ivory)">
 @php($user = auth()->user())
+<?php
+try {
+    $unreadMessages = \App\Models\ContactMessage::whereNull('read_at')->count();
+} catch (\Throwable $e) {
+    $unreadMessages = 0;
+}
+$unreadBadge = $unreadMessages > 0
+    ? '<span class="a-badge">' . ($unreadMessages > 99 ? '99+' : $unreadMessages) . '</span>'
+    : '';
+?>
 
 <div class="a-overlay" id="aOverlay"></div>
 
@@ -72,17 +82,7 @@
     <div class="grp">Community</div>
     @can('members')<a href="{{ route('admin.members.index') }}" class="{{ request()->routeIs('admin.members.*') ? 'is-current' : '' }}">Members</a>@endcan
     @can('moderate')<a href="{{ route('admin.comments.index') }}" class="{{ request()->routeIs('admin.comments.*') ? 'is-current' : '' }}">Comments</a>@endcan
-    @can('moderate')
-      @php
-        $unreadMessages = \App\Models\ContactMessage::whereNull('read_at')->count();
-      @endphp
-      <a href="{{ route('admin.messages.index') }}" class="{{ request()->routeIs('admin.messages.*') ? 'is-current' : '' }}">
-        Messages
-        @if ($unreadMessages > 0)
-          <span class="a-badge">{{ $unreadMessages > 99 ? '99+' : $unreadMessages }}</span>
-        @endif
-      </a>
-    @endcan
+    @can('moderate')<a href="{{ route('admin.messages.index') }}" class="{{ request()->routeIs('admin.messages.*') ? 'is-current' : '' }}">Messages {!! $unreadBadge !!}</a>@endcan
     @can('notify')<a href="{{ route('admin.notifications.index') }}" class="{{ request()->routeIs('admin.notifications.*') ? 'is-current' : '' }}">Notifications</a>@endcan
     <div class="grp">Insights &amp; access</div>
     @can('analytics')<a href="{{ route('admin.analytics.index') }}" class="{{ request()->routeIs('admin.analytics.*') ? 'is-current' : '' }}">Analytics</a>@endcan
