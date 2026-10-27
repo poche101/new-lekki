@@ -5,7 +5,7 @@ use App\Http\Controllers\{BlogController, CommentController, ContactController, 
     SearchController, StaticPageController};
 use App\Http\Controllers\Auth\{AuthenticatedSessionController, RegisteredUserController};
 use App\Http\Controllers\Admin\{AdController, AnalyticsController, CommentController as AdminCommentController,
-    ContentController, DashboardController, DepartmentController as AdminDepartmentController,
+    ContactMessageController, ContentController, DashboardController, DepartmentController as AdminDepartmentController,
     HomepageController, MediaController, MemberController, NotificationController, RoleController, SettingController};
 use Illuminate\Support\Facades\Route;
 
@@ -90,6 +90,11 @@ Route::middleware(['auth', 'active'])->prefix('admin')->name('admin.')->group(fu
         Route::get('/comments', [AdminCommentController::class, 'index'])->name('comments.index');
         Route::post('/comments', [AdminCommentController::class, 'store'])->name('comments.store');
         Route::delete('/comments/{comment}', [AdminCommentController::class, 'destroy'])->name('comments.destroy');
+
+        // Contact form messages: list, read, delete.
+        Route::get('/messages', [ContactMessageController::class, 'index'])->name('messages.index');
+        Route::get('/messages/{message}', [ContactMessageController::class, 'show'])->name('messages.show');
+        Route::delete('/messages/{message}', [ContactMessageController::class, 'destroy'])->name('messages.destroy');
     });
 
     Route::middleware('role:members')->group(function () {

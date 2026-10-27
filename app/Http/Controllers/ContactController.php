@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ContactMessage;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class ContactController extends Controller
 {
@@ -20,7 +20,7 @@ class ContactController extends Controller
             'message' => ['required', 'string', 'max:2000'],
         ]);
 
-        Log::info('Contact message submitted', $data); // swap for a Mailable in production
+        ContactMessage::create($data);
 
         return back()->with('status', 'Thanks, your message has been sent.');
     }
