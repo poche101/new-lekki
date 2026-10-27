@@ -1,22 +1,25 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 @section('title', 'Message from ' . $message->name)
 @section('content')
-<div class="wrap page-head">
-  <div class="crumbs"><a href="{{ route('admin.messages.index') }}">Messages</a> / {{ $message->name }}</div>
-  <h1>Message from {{ $message->name }}</h1>
+<div class="a-toolbar">
+  <a class="btn btn-ghost" href="{{ route('admin.messages.index') }}">&larr; Back to messages</a>
 </div>
-<div class="wrap">
-  <div class="card" style="max-width:720px">
-    <p><strong>Email:</strong> <a href="mailto:{{ $message->email }}">{{ $message->email }}</a></p>
-    <p><strong>Received:</strong> {{ $message->created_at->format('M j, Y g:i A') }}</p>
-    <hr style="margin:16px 0">
-    <p style="white-space:pre-line">{{ $message->message }}</p>
 
-    <form method="POST" action="{{ route('admin.messages.destroy', $message) }}" style="margin-top:20px"
-          onsubmit="return confirm('Delete this message?')">
+<div class="card" style="max-width:720px">
+  <p style="margin-bottom:6px"><b>{{ $message->name }}</b></p>
+  <p style="margin-bottom:6px"><a href="mailto:{{ $message->email }}">{{ $message->email }}</a></p>
+  <p style="color:var(--ink-soft);margin-bottom:0">Received {{ $message->created_at->format('M j, Y g:i A') }} ({{ $message->created_at->diffForHumans() }})</p>
+
+  <hr style="margin:18px 0;border:0;border-top:1px solid var(--line)">
+
+  <p style="white-space:pre-line;margin:0">{{ $message->message }}</p>
+
+  <div style="margin-top:22px;display:flex;gap:10px;flex-wrap:wrap">
+    <a class="btn btn-blue" href="mailto:{{ $message->email }}?subject={{ rawurlencode('Re: Your message to Christ Embassy Lekki') }}">Reply by email</a>
+    <form method="POST" action="{{ route('admin.messages.destroy', $message) }}" onsubmit="return confirm('Delete this message?')">
       @csrf
       @method('DELETE')
-      <button class="btn" type="submit">Delete</button>
+      <button class="btn btn-ghost" style="color:#DC2626" type="submit">Delete</button>
     </form>
   </div>
 </div>

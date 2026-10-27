@@ -17,6 +17,10 @@
   .a-side-close { display: none; }
   .a-top-title { display: flex; align-items: center; min-width: 0; }
   .a-top-title h1 { margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .a-badge {
+    display: inline-block; margin-left: 8px; padding: 1px 8px; min-width: 20px; text-align: center;
+    background: #DC2626; color: #fff; border-radius: 999px; font-size: .7rem; font-weight: 700; line-height: 1.5;
+  }
 
   @media (max-width: 900px) {
     .a-menu-btn { display: inline-flex; }
@@ -68,6 +72,10 @@
     <div class="grp">Community</div>
     @can('members')<a href="{{ route('admin.members.index') }}" class="{{ request()->routeIs('admin.members.*') ? 'is-current' : '' }}">Members</a>@endcan
     @can('moderate')<a href="{{ route('admin.comments.index') }}" class="{{ request()->routeIs('admin.comments.*') ? 'is-current' : '' }}">Comments</a>@endcan
+    @can('moderate')
+      @php($unreadMessages = \App\Models\ContactMessage::whereNull('read_at')->count())
+      <a href="{{ route('admin.messages.index') }}" class="{{ request()->routeIs('admin.messages.*') ? 'is-current' : '' }}">Messages@if ($unreadMessages > 0)<span class="a-badge">{{ $unreadMessages > 99 ? '99+' : $unreadMessages }}</span>@endif</a>
+    @endcan
     @can('notify')<a href="{{ route('admin.notifications.index') }}" class="{{ request()->routeIs('admin.notifications.*') ? 'is-current' : '' }}">Notifications</a>@endcan
     <div class="grp">Insights &amp; access</div>
     @can('analytics')<a href="{{ route('admin.analytics.index') }}" class="{{ request()->routeIs('admin.analytics.*') ? 'is-current' : '' }}">Analytics</a>@endcan
